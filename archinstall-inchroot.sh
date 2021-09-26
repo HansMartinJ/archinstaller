@@ -1,3 +1,5 @@
+[ -z $BOOT_PARTITION ] && echo "something went wrong" && exit 1
+
 # Timezone
 ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 # Harwareclock
@@ -12,7 +14,7 @@ locale-gen
 
 # Make boot directory and mount boot partition
 mkdir /boot/EFI
-mount /dev/sda1 /boot/EFI
+mount "$BOOT_PARTITION" /boot/EFI
 
 # Install grub on EFI
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
