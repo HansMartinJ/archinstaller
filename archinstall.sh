@@ -17,8 +17,6 @@ PARTITION_DISK=''
 timedatectl set-ntp true
 cat <(echo "$MIRRORS") /etc/pacman.d/mirrorlist > tmp
 cat tmp > /etc/pacman.d/mirrorlist && rm tmp
-
-
 read -p 'Setup done, press enter to continue'
 
 
@@ -27,25 +25,22 @@ mkfs.fat -F32 "${PARTITION_DISK}p1"
 mkswap "${PARTITION_DISK}p2"
 mkfs.ext4 "${PARTITION_DISK}p3"
 mkfs.ext4 "${PARTITION_DISK}p4"
-
 read -p 'Made filesystem, press enter to continue' 
 
 # MOUNTING and SWAPON
 swapon "${PARTITION_DISK}p2"
 mount "${PARTITION_DISK}p3" /mnt
 mkdir /mnt/home && mount "${PARTITION_DISK}p4" /mnt/home
-
 read -p 'Mounted partitions, press enter to continue'
 
 # INSTALLING BASE
-pacstrap -i /mnt base
+pacstrap -i /mnt base base-devel
 # GENERATE file system tab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 # Moving into install
 cat <(echo "BOOT_PARTITION=${PARTITION_DISK}p1") archinstall-inchroot.sh > /mnt/archinstall-inchroot.sh
 arch-chroot /mnt ./archinstall-inchroot.sh
 arch-chroot /mnt rm archinstall-inchroot.sh
-
 read -p 'installed defaults and bootloader, press enter to reboot'
 
 umount -a

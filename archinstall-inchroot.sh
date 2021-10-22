@@ -5,8 +5,8 @@ ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 # Harwareclock
 hwclock --systohc
 
-# Install needed packages, like linux(zen?) and bootloader
-pacman -S --noconfirm grub efibootmgr dosfstools openssh os-prober mtools linux-headers linux-zen linux-zen-headers
+# Install needed packages, like linux and bootloader
+pacman -S --noconfirm grub efibootmgr dosfstools openssh os-prober mtools linux-headers linux-zen linux-zen-headers networkmanager neovim linux-firmware
 
 # Set locale (by uncommenting the english)
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /etc/locale.gen
