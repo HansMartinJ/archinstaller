@@ -2,7 +2,7 @@
 source ./installenv.sh
 wipefs -a "$DEVICE"
 # ALL SPACES ARE NECESSARY
-gdisk "$1" <<EOF
+gdisk "$DEVICE" <<EOF
 n
 1
 
@@ -19,4 +19,5 @@ n
 
 8300
 p
+w
 EOF
