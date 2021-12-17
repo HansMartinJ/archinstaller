@@ -5,7 +5,7 @@ read -p 'Press enter to continue'
 DEVICE=''
 BTRFS=true
 [ -z $DEVICE ] && echo 'Please set device'  && exit 1
-sed -i "s/DEVICE=/DEVICE=$DEVICE/g" archinstall-2.sh
+sed -i "s/DEVICE=/DEVICE=\/dev\/$(basename $DEVICE)/g" archinstall-2.sh
 sed -i "s/BTRFS=/BTRFS=$BTRFS/g" archinstall-2.sh
 
 timedatectl set-ntp true
@@ -24,9 +24,9 @@ swapon "${DEVICE}p2" || exit 1
 if $BTRFS; then
     mkfs.btrfs "${DEVICE}p3"
     mount "${DEVICE}p3" /mnt
-    btrfs subvolume create /mnt/@
-    btrfs subvolume create /mnt/@home
-    btrfs subvolume create /mnt/@snapshots
+    btrfs subvolume create -f /mnt/@
+    btrfs subvolume create -f /mnt/@home
+    btrfs subvolume create -f /mnt/@snapshots
     umount /mnt
     mount -o noatime,compress=no,space_cache=v2,subvol=@ \
         "${DEVICE}p3" /mnt

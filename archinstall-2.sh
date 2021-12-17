@@ -8,11 +8,11 @@ ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 hwclock --systohc
 
 # Install needed packages, like linux and bootloader
-pacman -S --noconfirm\
+pacman -S --noconfirm \
     grub efibootmgr dosfstools openssh os-prober mtools \
     linux-zen linux-zen-headers \
     networkmanager neovim linux-firmware git \
-    xdg-utils xdg-user-dils
+    xdg-utils xdg-user-dirs
 
 # Set locale (by uncommenting the english)
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' /etc/locale.gen
@@ -33,3 +33,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Make password
 echo "enter password for root"
 passwd
+
+echo "finally, exit, umount -a and reboot"
