@@ -20,7 +20,7 @@ locale-gen
 
 # Make boot directory and mount boot partition
 mkdir /boot/EFI
-mount "${BOOT_PARTITION}p1" /boot/EFI
+mount "${DEVICE}p1" /boot/EFI
 
 [ "$BTRFS" ] && sed -i 's/MODULES=()/MODULES=(btrfs)/g' /etc/mkinitcpio.conf
 
