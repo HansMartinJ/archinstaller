@@ -41,7 +41,7 @@ pacstrap -i /mnt base base-devel
 # GENERATE file system tab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
-cp installenv /mnt
+cp installenv.sh /mnt
 cp archinstall-2.sh /mnt
 
 # Moving into install
