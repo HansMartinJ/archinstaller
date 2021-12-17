@@ -22,7 +22,7 @@ mkdir /boot/EFI
 mount "${DEVICE}p1" /boot/EFI
 
 if "$BTRFS"; then
-    pacman -S --noconfirm btrfs
+    pacman -S --noconfirm btrfs-progs
     sed -i 's/MODULES=()/MODULES=(btrfs)/g' /etc/mkinitcpio.conf
     # Reinstall linux-zen to trigger mkinitcpio cuz im lazy
     pacman -S --noconfirm linux-zen
