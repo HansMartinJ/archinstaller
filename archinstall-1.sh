@@ -1,5 +1,5 @@
 echo "starting setup..."
-source installenv
+source ./installenv
 
 [ -z $DEVICE ] && echo 'Please set device'  && exit 1
 
@@ -7,7 +7,7 @@ timedatectl set-ntp true
 #reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 [ "$BTRFS" ] && echo 'using btrfs'
-read -p 'Setup done, press enter to continue (when reflector is finished)'
+read -p 'Setup done, press enter to continue'
 
 
 # FORMATING PARTITIONS WITH FILE SYSTEMS
@@ -19,9 +19,9 @@ swapon "${DEVICE}p2" || exit 1
 if $BTRFS; then
     mkfs.btrfs "${DEVICE}p3"
     mount "${DEVICE}p3" /mnt
-    btrfs subvolume create -f /mnt/@
-    btrfs subvolume create -f /mnt/@home
-    btrfs subvolume create -f /mnt/@snapshots
+    btrfs subvolume create /mnt/@
+    btrfs subvolume create /mnt/@home
+    btrfs subvolume create /mnt/@snapshots
     umount /mnt
     mount -o noatime,compress=no,space_cache=v2,subvol=@ \
         "${DEVICE}p3" /mnt
