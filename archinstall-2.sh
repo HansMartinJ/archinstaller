@@ -1,5 +1,5 @@
-source installenv
-[ -z $DEVICE ] && echo "Please set device" && exit 1
+source ./installenv.sh
+[ -z "$DEVICE" ] && echo 'Please set device' && exit 1
 
 # Timezone
 ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
@@ -21,7 +21,10 @@ locale-gen
 mkdir /boot/EFI
 mount "${DEVICE}p1" /boot/EFI
 
-[ "$BTRFS" ] && sed -i 's/MODULES=()/MODULES=(btrfs)/g' /etc/mkinitcpio.conf
+if "$BTRFS"; then
+    sed -i 's/MODULES=()/MODULES=(btrfs)/g' /etc/mkinitcpio.conf
+    mkinitcpio linux-zen
+fi
 
 # Install grub on EFI
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck

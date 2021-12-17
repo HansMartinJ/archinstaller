@@ -1,12 +1,10 @@
-echo "starting setup..."
-source ./installenv
-
-[ -z $DEVICE ] && echo 'Please set device'  && exit 1
+source ./installenv.sh
+[ -z "$DEVICE" ] && echo 'Please set device' && exit 1
 
 timedatectl set-ntp true
 #reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
-[ "$BTRFS" ] && echo 'using btrfs'
+"$BTRFS" && echo 'using btrfs'
 read -p 'Setup done, press enter to continue'
 
 
@@ -16,7 +14,7 @@ mkfs.fat -F32 "${DEVICE}p1" || exit 1
 mkswap "${DEVICE}p2" || exit 1
 swapon "${DEVICE}p2" || exit 1
 
-if $BTRFS; then
+if "$BTRFS"; then
     mkfs.btrfs "${DEVICE}p3"
     mount "${DEVICE}p3" /mnt
     btrfs subvolume create /mnt/@

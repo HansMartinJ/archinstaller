@@ -1,9 +1,22 @@
-[ -z "$1" ] && echo "Please provide device" && exit 1
-wipefs -a "$1"
+[ -z "$DEVICE" ] && echo "Please provide device" && exit 1
+source ./installenv.sh
+wipefs -a "$DEVICE"
+# ALL SPACES ARE NECESSARY
 gdisk "$1" <<EOF
 n
 1
 
-+1G
++$BOOTSIZE
 ef00
+n
+2
+
++$SWAPSIZE
+8200
+n
+3
+
+
+8300
+p
 EOF
