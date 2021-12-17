@@ -1,5 +1,5 @@
-DEVICE=''
-BTRFS=true
+DEVICE=
+BTRFS=
 [ -z $DEVICE ] && echo "Please set device" && exit 1
 
 # Timezone

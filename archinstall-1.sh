@@ -5,7 +5,8 @@ read -p 'Press enter to continue'
 DEVICE=''
 BTRFS=true
 [ -z $DEVICE ] && echo 'Please set device'  && exit 1
-
+sed -i "s/DEVICE=/DEVICE=$DEVICE/g" archinstall-2.sh
+sed -i "s/BTRFS=/BTRFS=$BTRFS/g" archinstall-2.sh
 
 timedatectl set-ntp true
 reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
