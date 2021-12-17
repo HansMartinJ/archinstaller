@@ -41,8 +41,8 @@ pacstrap -i /mnt base base-devel
 # GENERATE file system tab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
-cp installenv /mnt/installenv
-cp archinstall-2.sh /mnt/archinstall-2.sh
+cp installenv /mnt
+cp archinstall-2.sh /mnt
 
 # Moving into install
 echo "First part completed, now do \"arch-chroot /mnt\" and \"curl next part\" "
