@@ -23,9 +23,9 @@ read -p 'Setup done, press enter to continue'
 
 # FORMATING PARTITIONS WITH FILE SYSTEMS
 # Mounting /EFI happens in chroot
-mkfs.fat -F32 "${PARTITION_DISK}p1"
-mkswap "${PARTITION_DISK}p2"
-swapon "${PARTITION_DISK}p2"
+mkfs.fat -F32 "${PARTITION_DISK}p1" || exit 1
+mkswap "${PARTITION_DISK}p2" || exit 1
+swapon "${PARTITION_DISK}p2" || exit 1
 
 if $BTRFS; then
     mkfs.btrfs "${PARTITION_DISK}p3"
@@ -55,6 +55,7 @@ pacstrap -i /mnt base base-devel
 genfstab -U -p /mnt >> /mnt/etc/fstab
 # Moving into install
 arch-chroot /mnt << EOF
+read -p 'in chroot, press enter to continue'
 # Timezone
 ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 # Harwareclock
@@ -63,7 +64,7 @@ hwclock --systohc
 # Install needed packages, like linux and bootloader
 pacman -S --noconfirm\
     grub efibootmgr dosfstools openssh os-prober mtools \
-    linux-zen linux-zen-headers base-devel \
+    linux-zen linux-zen-headers \
     networkmanager neovim linux-firmware git \
     xdg-utils xdg-user-dils
 
