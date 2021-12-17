@@ -22,8 +22,10 @@ mkdir /boot/EFI
 mount "${DEVICE}p1" /boot/EFI
 
 if "$BTRFS"; then
+    pacman -S --noconfirm btrfs
     sed -i 's/MODULES=()/MODULES=(btrfs)/g' /etc/mkinitcpio.conf
-    mkinitcpio linux-zen
+    # Reinstall linux-zen to trigger mkinitcpio cuz im lazy
+    pacman -S --noconfirm linux-zen
 fi
 
 # Install grub on EFI

@@ -10,9 +10,9 @@ read -p 'Setup done, press enter to continue'
 
 # FORMATING PARTITIONS WITH FILE SYSTEMS
 # Mounting /EFI happens in chroot
-mkfs.fat -F32 "${DEVICE}p1" || exit 1
-mkswap "${DEVICE}p2" || exit 1
-swapon "${DEVICE}p2" || exit 1
+mkfs.fat -F32 "${DEVICE}p1"
+mkswap "${DEVICE}p2"
+swapon "${DEVICE}p2"
 
 if "$BTRFS"; then
     mkfs.btrfs -f "${DEVICE}p3"
