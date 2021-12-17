@@ -15,7 +15,7 @@ mkswap "${DEVICE}p2" || exit 1
 swapon "${DEVICE}p2" || exit 1
 
 if "$BTRFS"; then
-    mkfs.btrfs "${DEVICE}p3"
+    mkfs.btrfs -f "${DEVICE}p3"
     mount "${DEVICE}p3" /mnt
     btrfs subvolume create /mnt/@
     btrfs subvolume create /mnt/@home
