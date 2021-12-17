@@ -1,5 +1,4 @@
-DEVICE=
-BTRFS=
+source installenv
 [ -z $DEVICE ] && echo "Please set device" && exit 1
 
 # Timezone

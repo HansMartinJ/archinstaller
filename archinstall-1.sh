@@ -1,15 +1,10 @@
 echo "starting setup..."
-read -p 'Press enter to continue'
+source installenv
 
-
-DEVICE=''
-BTRFS=true
 [ -z $DEVICE ] && echo 'Please set device'  && exit 1
-sed -i "s/DEVICE=/DEVICE=\/dev\/$(basename $DEVICE)/g" archinstall-2.sh
-sed -i "s/BTRFS=/BTRFS=$BTRFS/g" archinstall-2.sh
 
 timedatectl set-ntp true
-reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+#reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 [ "$BTRFS" ] && echo 'using btrfs'
 read -p 'Setup done, press enter to continue (when reflector is finished)'
@@ -47,6 +42,9 @@ read -p 'Mounted partitions, press enter to continue'
 pacstrap -i /mnt base base-devel
 # GENERATE file system tab
 genfstab -U -p /mnt >> /mnt/etc/fstab
+
+cp installenv /mnt/installenv
 cp archinstall-2.sh /mnt/archinstall-2.sh
+
 # Moving into install
 echo "First part completed, now do \"arch-chroot /mnt\" and \"curl next part\" "
