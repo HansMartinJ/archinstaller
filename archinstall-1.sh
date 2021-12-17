@@ -9,10 +9,10 @@ sed -i "s/DEVICE=/DEVICE=$DEVICE/g" archinstall-2.sh
 sed -i "s/BTRFS=/BTRFS=$BTRFS/g" archinstall-2.sh
 
 timedatectl set-ntp true
-reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 [ "$BTRFS" ] && echo 'using btrfs'
-read -p 'Setup done, press enter to continue'
+read -p 'Setup done, press enter to continue (when reflector is finished)'
 
 
 # FORMATING PARTITIONS WITH FILE SYSTEMS
