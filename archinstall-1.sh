@@ -19,6 +19,7 @@ if "$BTRFS"; then
     mount "${DEVICE}p3" /mnt
     btrfs subvolume create /mnt/@
     btrfs subvolume create /mnt/@home
+    # Prob no necessary to make snapshots now
     btrfs subvolume create /mnt/@snapshots
     umount /mnt
     mount -o noatime,compress=no,space_cache=v2,subvol=@ \
