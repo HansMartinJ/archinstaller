@@ -38,6 +38,7 @@ fi
 read -p 'Mounted partitions, press enter to continue'
 
 # INSTALLING BASE
+pacman -S archlinux-keyring
 pacstrap -i /mnt base base-devel
 # GENERATE file system tab
 genfstab -U -p /mnt >> /mnt/etc/fstab

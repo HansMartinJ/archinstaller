@@ -25,9 +25,9 @@ cat <<EOF > /etc/hosts
 127.0.1.1        $HOSTNAME
 EOF
 
-# Increase install cores
-echo "ParalellDownloads = $CPUCORES" > /etc/pacman.conf
-echo "MAKEFLAGS=\"-j$CPUCORES\"" > /etc/makepkg.conf
+# Increase install cores (THIS IS WRONG TODO FIX! NEEDS TO BE SED)
+# echo "ParalellDownloads = $CPUCORES" >> /etc/pacman.conf
+# echo "MAKEFLAGS=\"-j$CPUCORES\"" >> /etc/makepkg.conf
 
 # Make norwegian standard keymap
 echo "KEYMAP=no-latin1" > /etc/vconsole.conf

@@ -13,6 +13,8 @@ BTRFS=true
 SNAPPER=false
 
 ESSENTIALS="\
+networkmanager
+reflector
 grub
 efibootmgr
 dosfstools
@@ -41,13 +43,11 @@ noto-fonts-emoji
 noto-fonts-extra"
 
 SYSTEM_PROGRAMS="\
-networkmanager
 git
 xdg-utils
 man-db
 zsh
 wget
-reflector
 libnotify
 pipewire
 pipewire-pulse
