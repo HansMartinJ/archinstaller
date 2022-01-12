@@ -1,5 +1,5 @@
 source ./installenv.sh
-[ -z "$DEVICE" ] && echo "Please provide device" && exit 1
+[ -z "$DEVICE" ] && echo "Please provide device to format" && exit 1
 wipefs -a "$DEVICE"
 # ALL SPACES ARE NECESSARY
 gdisk "$DEVICE" <<EOF
