@@ -5,7 +5,6 @@ timedatectl set-ntp true
 #reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 "$BTRFS" && echo 'using btrfs'
-read -p 'Setup done, press enter to continue'
 
 
 # FORMATING PARTITIONS WITH FILE SYSTEMS
@@ -19,9 +18,9 @@ if "$BTRFS"; then
     mount "${DEVICE}p3" /mnt
     btrfs subvolume create /mnt/@
     btrfs subvolume create /mnt/@home
-    # Prob no necessary to make snapshots now
-    # TODO /var/log if using snapper
     btrfs subvolume create /mnt/@snapshots
+    # Prob not necessary to make snapshots now, but did it anyway
+    # TODO /var/log if using snapper
     umount /mnt
     mount -o noatime,compress=no,space_cache=v2,subvol=@ \
         "${DEVICE}p3" /mnt
@@ -45,6 +44,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 
 cp installenv.sh /mnt
 cp archinstall-2.sh /mnt
+cp archinstall-3.sh /mnt
 
 # Moving into install
-echo "First part completed, now do \"arch-chroot /mnt\" and \"curl next part\" "
+echo "First part completed, now do \"arch-chroot /mnt\""
